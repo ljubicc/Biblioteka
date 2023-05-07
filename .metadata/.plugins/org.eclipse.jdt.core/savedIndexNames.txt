@@ -1,0 +1,6 @@
+INDEX VERSION 1.131+C:\Users\slobo\Desktop\RadnaOkruzrnjaJava\FolderSaBazama\vs_povezivanjeSaBazom\.metadata\.plugins\org.eclipse.jdt.core
+163020426.index
+1865797976.index
+2382333086.index
+75931715.index
+2400255126.index

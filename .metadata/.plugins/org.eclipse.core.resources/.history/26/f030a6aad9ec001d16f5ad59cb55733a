@@ -1,0 +1,137 @@
+package biblioteka;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import com.mysql.cj.protocol.x.SyncFlushDeflaterOutputStream;
+
+public class OperacijeNadBazom {
+
+	public static void read(int id) {
+
+		try {
+			Connection conn = Konekcija.konekcija();
+			String select = "SELECT * FROM clanovi WHERE id_clana = " + id;
+			Statement ps = conn.createStatement();
+			ResultSet rs = ps.executeQuery(select);
+
+			while (rs.next()) {
+				Clanovi clan = new Clanovi();
+				clan.setId_clana(rs.getInt("id_clana"));
+				clan.setIme(rs.getString("ime"));
+				clan.setPrezime(rs.getString("prezime"));
+				clan.setDatumRodjenja(rs.getString("datumRodjenja"));
+				clan.setTelefon(rs.getString("telefon"));
+				clan.setBrojClanskeKarte(rs.getString("brojClanskeKarte"));
+				clan.setUlica(rs.getString("ulica"));
+				clan.setBroj(rs.getString("broj"));
+
+				System.out.println(clan.toString());
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	public static void read() throws SQLException { // metoda radi !!!!
+		try {
+			Connection conn = Konekcija.konekcija();
+			String select = "SELECT * FROM clanovi";
+			Statement stm = conn.createStatement();
+			ResultSet rs = stm.executeQuery(select);
+
+			while (rs.next()) {
+				Clanovi clan = new Clanovi();
+				clan.setId_clana(rs.getInt("id_clana"));
+				clan.setIme(rs.getString("ime"));
+				clan.setPrezime(rs.getString("prezime"));
+				clan.setDatumRodjenja(rs.getString("datumRodjenja"));
+				clan.setTelefon(rs.getString("telefon"));
+				clan.setBrojClanskeKarte(rs.getString("brojClanskeKarte"));
+				clan.setUlica(rs.getString("ulica"));
+				clan.setBroj(rs.getString("broj"));
+
+				System.out.println(clan.toString());
+				System.out.println();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static void update(int id, String ulica, String broj) throws SQLException {
+		try {
+			Connection conn = Konekcija.konekcija();
+			String select = "SELECT * FROM clanovi WHERE id_clana = " + id;
+			Statement st = conn.createStatement();
+			ResultSet rs = st.executeQuery(select);
+
+			Clanovi clan = new Clanovi();
+			
+			while (rs.next()) {
+				clan.setId_clana(rs.getInt("id_clana"));
+				clan.setIme("ime");
+				clan.setPrezime(rs.getString("prezime"));
+				clan.setDatumRodjenja(rs.getString("datumRodjenja"));
+				clan.setTelefon(rs.getString("telefon"));
+				clan.setBrojClanskeKarte(rs.getString("brojClanskeKarte"));
+				clan.setUlica(rs.getString("ulica"));
+				clan.setBroj(rs.getString("broj"));
+
+			}
+			
+			
+			String sqlupdate = "UPDATE `clanovi` SET `id_clana`= ?,`ime`= ?,`prezime`= ?,`datumrodjenja`= ?,`telefon`= ?,`brojclanskekarte`= ?,`ulica`= ?,`broj`= ? WHERE id_clana = ?";
+
+			PreparedStatement preps = conn.prepareStatement(sqlupdate);
+			preps.setInt(1, clan.getId_clana());
+			preps.setString(2, clan.getIme());
+			preps.setString(3,clan.getPrezime());
+			preps.setString(4, clan.getDatumRodjenja());
+			preps.setString(5, clan.getTelefon());
+			preps.setString(6, clan.getBrojClanskeKarte());
+			preps.setString(7, clan.getUlica());
+			preps.setString(8, clan.getBroj());
+			preps.setInt(9, clan.getId_clana());
+			int brojRedova = preps.executeUpdate();
+			if(brojRedova > 0) {
+				System.out.println("Uspesno izvrsena izmena!");
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static void create(int id_clana, String ime, String prezime, String datumRodjenja, String telefon,
+			String brojClanskeKarte, String ulica, String broj) {
+		try {
+			Connection conn = Konekcija.konekcija();
+			String sqlcreate = "INSERT INTO `clanovi`(`id_clana`, `ime`, `prezime`, `datumrodjenja`, `telefon`, `brojclanskekarte`, `ulica`, `broj`) VALUES (?,?,?,?,?,?,?,?)";
+			PreparedStatement ps = conn.prepareStatement(sqlcreate);
+			ps.setInt(1, id_clana);
+			ps.setString(2, ime);
+			ps.setString(3, prezime);
+			ps.setString(4, datumRodjenja);
+			ps.setString(5, telefon);
+			ps.setString(6, brojClanskeKarte);
+			ps.setString(7, ulica);
+			ps.setString(8, broj);
+			ps.executeUpdate();
+		} catch (SQLException e) {
+		
+			e.printStackTrace();
+		}
+			
+		
+
+	}
+
+	public static void delete() {
+
+	}
+}

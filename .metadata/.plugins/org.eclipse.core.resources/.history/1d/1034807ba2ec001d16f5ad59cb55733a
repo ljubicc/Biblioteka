@@ -1,0 +1,106 @@
+package biblioteka;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class Clanovi {
+	
+	private int id_clana;
+	private String ime;
+	private String prezime;
+	private String datumRodjenja;
+	private String telefon;
+	private String brojClanskeKarte;
+	private String ulica;
+	private String broj;
+	
+	
+	public Clanovi(int id_clana, String ime, String prezime, String datumRodjenja, String telefon,
+			String brojClanskeKarte, String ulica, String broj) {
+		this.id_clana = id_clana;
+		this.ime = ime;
+		this.prezime = prezime;
+		this.datumRodjenja = datumRodjenja;
+		this.telefon = telefon;
+		this.brojClanskeKarte = brojClanskeKarte;
+		this.ulica = ulica;
+		this.broj = broj;
+	}
+	public int getId_clana() {
+		return id_clana;
+	}
+	public void setId_clana(int id_clana) {
+		this.id_clana = id_clana;
+	}
+	public String getIme() {
+		return ime;
+	}
+	public void setIme(String ime) {
+		this.ime = ime;
+	}
+	public String getPrezime() {
+		return prezime;
+	}
+	public void setPrezime(String prezime) {
+		this.prezime = prezime;
+	}
+	public String getDatumRodjenja() {
+		return datumRodjenja;
+	}
+	public void setDatumRodjenja(String datumRodjenja) {
+		this.datumRodjenja = datumRodjenja;
+	}
+	public String getTelefon() {
+		return telefon;
+	}
+	public void setTelefon(String telefon) {
+		this.telefon = telefon;
+	}
+	public String getBrojClanskeKarte() {
+		return brojClanskeKarte;
+	}
+	public void setBrojClanskeKarte(String brojClanskeKarte) {
+		this.brojClanskeKarte = brojClanskeKarte;
+	}
+	public String getUlica() {
+		return ulica;
+	}
+	public void setUlica(String ulica) {
+		this.ulica = ulica;
+	}
+	public String getBroj() {
+		return broj;
+	}
+	public void setBroj(String broj) {
+		this.broj = broj;
+	}
+	
+	public static void select() throws SQLException{
+		Connection conn = Konekcija.konekcija();
+		String select = "SELECT * FROM clanovi";
+		Statement stm = conn.createStatement();
+		ResultSet rs = stm.executeQuery(select);
+		//List<Clanovi> listaClanova = new ArrayList<>();
+		while(rs.next()) {
+			int id_clana = rs.getInt(1);
+			String ime = rs.getString(2);
+			String prezime = rs.getString(3);
+			String datumRodjenja = rs.getString(4);
+			String telefon = rs.getString(5);
+			String brojClanskeKarte = rs.getString(6);
+			String ulica = rs.getString(7);
+			String broj = rs.getString(8);
+			
+			Clanovi clan = new Clanovi(id_clana,ime,prezime,datumRodjenja,telefon,brojClanskeKarte,ulica,broj);
+			System.out.println(clan.toString());
+			System.out.println();
+	}
+	
+	public String toString() {
+		return "id clana: " + id_clana + "\nime: " + ime + "\nprezime: " + prezime + "\ndatum rodjenja: "  + datumRodjenja +
+				"\ntelefon: " + telefon + "\nbroj clanske karte: " + brojClanskeKarte + "\nulica: " + ulica + "\nbroj: " + broj; 
+	}
+
+}

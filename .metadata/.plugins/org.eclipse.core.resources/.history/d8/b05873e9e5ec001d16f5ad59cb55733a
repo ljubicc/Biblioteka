@@ -1,0 +1,42 @@
+package biblioteka;
+
+
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) throws Exception {
+
+		Scanner sc = new Scanner(System.in);  
+			
+		System.out.println("Izaberite redni broj");
+		System.out.println("1. metoda read() nad clanovima biblioteke" + "\n2. metoda update() promena adrese clana biblioteke" + 
+		                   "3. metoda create(), pravljenje novog clana" + "\n4. metoda delete(), brisanje clana iz biblioteke" +
+				           "5. -1 izlaz iz aplikacije");
+		String odgovor = sc.next();
+		sc.close();
+		
+		while(true) {
+			switch(odgovor) {
+			case "1" :
+				OperacijeNadBazom.read();
+				break;
+			case "2" :
+				OperacijeNadBazom.update();
+				break;
+			case "3" :
+				OperacijeNadBazom.create();
+				break;
+			case "4" :
+				OperacijeNadBazom.delete();
+				break;
+			case "5" :
+				System.out.println("Kraj programa");
+				System.exit(0);
+			}
+		}
+
+
+	}
+
+}

@@ -1,0 +1,36 @@
+package biblioteka;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
+public class Main {
+
+	public static void main(String[] args) throws Exception {
+
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+//			System.out.println("Unos novog clana:");
+//			System.out.println("id?");
+//			String id = br.readLine();
+//			int id_clana = Integer.parseInt(id);
+//			System.out.println("ime?");
+//			String ime = br.readLine();
+//			System.out.println("prezime?");
+//			String prezime = br.readLine();
+//			System.out.println("datum rodjenja?");
+//			String datRodj = br.readLine();
+//			System.out.println("tel?");
+//			String tel = br.readLine();
+//			System.out.println("broj cl karte?");
+//			String brclk = br.readLine();
+//			System.out.println("ulica?");
+//			String ulica = br.readLine();
+//			System.out.println("broj?");
+//			String broj = br.readLine();
+
+//			OperacijeNadBazom.create(id_clana, ime, prezime, datRodj, tel, brclk, ulica, broj);
+//			OperacijeNadBazom.read();
+
+	}
+
+}

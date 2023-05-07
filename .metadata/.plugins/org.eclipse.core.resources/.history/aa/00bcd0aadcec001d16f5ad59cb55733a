@@ -1,0 +1,23 @@
+package biblioteka;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.Scanner;
+
+public class NoviMain {
+
+	public static void main(String[] args) throws Exception{
+		
+		//Scanner sc = new Scanner(System.in);
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		System.out.println("Unesite novu ulicu: ");
+		String ulica = br.readLine();
+		System.out.println("Unesite novi broj: ");
+		String broj = br.readLine();
+		
+		System.out.println(ulica);
+		System.out.println(broj);
+
+	}
+
+}

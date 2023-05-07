@@ -1,0 +1,138 @@
+package biblioteka;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+
+
+public class OperacijeNadBazom {
+
+	// metoda cita podatke iz baze vezabe za prosledjeni primarni kljuc, pravi
+	// objekat i prikazuje podatke objekta
+	public static void read(int id) {
+
+		try {
+			Connection conn = Konekcija.konekcija();
+			String select = "SELECT * FROM clanovi WHERE id_clana = " + id;
+			Statement ps = conn.createStatement();
+			ResultSet rs = ps.executeQuery(select);
+
+			while (rs.next()) {
+				Clanovi clan = new Clanovi();
+				clan.setId_clana(rs.getInt("id_clana"));
+				clan.setIme(rs.getString("ime"));
+				clan.setPrezime(rs.getString("prezime"));
+				clan.setDatumRodjenja(rs.getString("datumRodjenja"));
+				clan.setTelefon(rs.getString("telefon"));
+				clan.setBrojClanskeKarte(rs.getString("brojClanskeKarte"));
+				clan.setUlica(rs.getString("ulica"));
+				clan.setBroj(rs.getString("broj"));
+
+				System.out.println(clan.toString());
+			}
+			
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	// metod cita podatke iz baze, pravi objekte i ispisuje podatke objekata
+	public static void read() throws SQLException {
+		try {
+			Connection conn = Konekcija.konekcija();
+			String select = "SELECT * FROM clanovi";
+			Statement stm = conn.createStatement();
+			ResultSet rs = stm.executeQuery(select);
+
+			while (rs.next()) {
+				Clanovi clan = new Clanovi();
+				clan.setId_clana(rs.getInt("id_clana"));
+				clan.setIme(rs.getString("ime"));
+				clan.setPrezime(rs.getString("prezime"));
+				clan.setDatumRodjenja(rs.getString("datumRodjenja"));
+				clan.setTelefon(rs.getString("telefon"));
+				clan.setBrojClanskeKarte(rs.getString("brojClanskeKarte"));
+				clan.setUlica(rs.getString("ulica"));
+				clan.setBroj(rs.getString("broj"));
+
+				System.out.println(clan.toString());
+				System.out.println();
+			}
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	// metoda menja adresu clana biblioteke ciji je id prosledjen zajedno sa ulicom
+	// i brojem
+	public static void update(int id, String ulica, String broj) throws SQLException {
+		try {
+			Connection conn = Konekcija.konekcija();
+			String sqlupdate = "UPDATE `clanovi` SET `ulica`= ?,`broj`= ? WHERE id_clana = ?";
+			PreparedStatement preps = conn.prepareStatement(sqlupdate);
+
+			preps.setString(1, ulica);
+			preps.setString(2, broj);
+			preps.setInt(3, id);
+			int brojRedova = preps.executeUpdate();
+			if (brojRedova > 0) {
+				System.out.println("Uspesno izvrsena izmena!");
+			}
+			
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	// metoda kreira novog clana biblioteke sa prosledjenim parametrima
+	public static void create(int id_clana, String ime, String prezime, String datumRodjenja, String telefon,
+			String brojClanskeKarte, String ulica, String broj) {
+		try {
+			Connection conn = Konekcija.konekcija();
+			String sqlcreate = "INSERT INTO `clanovi`(`id_clana`, `ime`, `prezime`, `datumrodjenja`, `telefon`, `brojclanskekarte`, `ulica`, `broj`) VALUES (?,?,?,?,?,?,?,?)";
+			PreparedStatement ps = conn.prepareStatement(sqlcreate);
+			ps.setInt(1, id_clana);
+			ps.setString(2, ime);
+			ps.setString(3, prezime);
+			ps.setString(4, datumRodjenja);
+			ps.setString(5, telefon);
+			ps.setString(6, brojClanskeKarte);
+			ps.setString(7, ulica);
+			ps.setString(8, broj);
+			ps.executeUpdate();
+			
+			conn.close();
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+
+	}
+	
+	// metoda brise clana iza baze ciji je id prosedjen metodi
+	public static void delete(int id) {
+
+		try {
+			Connection conn = Konekcija.konekcija();
+			String sqldelete = "DELETE * FROM clanovi WHERE id_clana = ?";
+			PreparedStatement ps = conn.prepareStatement(sqldelete);
+			ps.setInt(1, id);
+
+			int brojRedova = ps.executeUpdate();
+			if (brojRedova > 0) {
+				System.out.println("Uspesno obrisan podatak!");
+			}
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	}
+}

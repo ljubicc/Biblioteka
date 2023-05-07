@@ -1,0 +1,99 @@
+package biblioteka;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.sql.Connection;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Scanner;
+
+public class Main {
+	
+	
+
+	public static void main(String[] args) throws Exception{
+		
+		
+		
+			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+			
+			System.out.println("Unos novog clana:");
+			System.out.println("id?");
+			String id = br.readLine();
+			int id_clana = Integer.parseInt(id);
+			System.out.println("ime?");
+			String ime = br.readLine();
+			System.out.println("prezime?");
+			String prezime = br.readLine();
+			System.out.println("datum rodjenja?");
+			String datRodj = br.readLine();
+			System.out.println("tel?");
+			String tel = br.readLine();
+			System.out.println("broj cl karte?");
+			String brclk = br.readLine();
+			System.out.println("ulica?");
+			String ulica = br.readLine();
+			System.out.println("broj?");
+			String broj = br.readLine();
+			
+			OperacijeNadBazom.create(id_clana, ime, prezime, brclk, tel, broj, ulica, broj);
+			OperacijeNadBazom.read();
+			
+		
+
+			
+			
+
+		
+//		try{
+//			Connection conn = Konekcija.konekcija();
+//			String select = "SELECT * FROM clanovi";
+//			Statement stm = conn.createStatement();
+//			ResultSet rs = stm.executeQuery(select);
+//			//List<Clanovi> listaClanova = new ArrayList<>();
+//			while(rs.next()) {
+//				int id_clana = rs.getInt(1);
+//				String ime = rs.getString(2);
+//				String prezime = rs.getString(3);
+//				String datumRodjenja = rs.getString(4);
+//				String telefon = rs.getString(5);
+//				String brojClanskeKarte = rs.getString(6);
+//				String ulica = rs.getString(7);
+//				String broj = rs.getString(8);
+//				
+//				Clanovi clan = new Clanovi(id_clana,ime,prezime,datumRodjenja,telefon,brojClanskeKarte,ulica,broj);
+//				System.out.println(clan.toString());
+//				System.out.println();
+				
+//				StringBuilder sb = new StringBuilder();
+//				sb.append("id clana: ");
+//				sb.append(id_clana);
+//				sb.append("\nIme: ");
+//				sb.append(ime);
+//				sb.append("\nPrezime: ");
+//				sb.append(prezime);
+//				sb.append("\nDatum rodjenja: ");
+//				sb.append(datumRodjenja);
+//				sb.append("\nTelefon: ");
+//				sb.append(telefon);
+//				sb.append("\nBroj licne karte: ");
+//				sb.append(brojClanskeKarte);
+//				sb.append("\nUlica: ");
+//				sb.append(ulica);
+//				sb.append("\nBroj: ");
+//				sb.append(broj);
+//				System.out.println();
+//				System.out.println(sb.toString());
+//			}
+//		}
+//		catch(SQLException e) {
+//			e.printStackTrace();
+//		}
+		
+		
+
+	}
+
+}

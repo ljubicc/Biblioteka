@@ -1,0 +1,21 @@
+package biblioteka;
+
+import java.util.Scanner;
+
+public class NoviMain {
+
+	public static void main(String[] args) {
+		
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.println("Unesite novu ulicu: ");
+		String ulica = sc.next();
+		System.out.println("Unesite novi broj: ");
+		String broj = sc.next();
+		
+		System.out.println(ulica);
+		System.out.println(broj);
+
+	}
+
+}
